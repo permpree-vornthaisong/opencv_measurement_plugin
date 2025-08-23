@@ -224,7 +224,7 @@ Contributions are welcome! Please feel free to submit a Pull Request. For major 
 ### Development Setup
 
 1. Fork the repository
-2. Clone your fork: `git clone https://github.com/your-username/opencv_measurement_plugin.git`
+2. Clone your fork: `git clone https://github.com/permpree-vornthaisong/opencv_measurement_plugin.git`
 3. Install dependencies: `flutter pub get`
 4. Run the example: `cd example && flutter run`
 
@@ -236,9 +236,9 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 If you have any questions or issues:
 
-- 📧 Create an issue on [GitHub](https://github.com/your-username/opencv_measurement_plugin/issues)
+- 📧 Create an issue on [GitHub](https://github.com/permpree-vornthaisong/opencv_measurement_plugin/issues)
 - 📖 Check the [documentation](https://pub.dev/packages/opencv_measurement_plugin)
-- 💬 Join our [community discussions](https://github.com/your-username/opencv_measurement_plugin/discussions)
+- 💬 Join our [community discussions](https://github.com/permpree-vornthaisong/opencv_measurement_plugin/discussions)
 
 ## 🙏 Acknowledgments
 
