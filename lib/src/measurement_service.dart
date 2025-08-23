@@ -5,6 +5,7 @@ import 'dart:typed_data';
 
 import 'measurement_bindings.dart';
 import 'measurement_data.dart';
+import 'native_library_loader.dart';
 
 class MeasurementService {
   Pointer<NativeType>? _handle;
@@ -32,6 +33,14 @@ class MeasurementService {
     try {
       _statusController.add('Initializing native measurement system...');
 
+      // First ensure DLLs are extracted (this is now the critical step)
+      final dllsExtracted = await NativeLibraryLoader.extractAllDlls();
+      if (!dllsExtracted) {
+        _statusController.add('Failed to extract required DLLs');
+        return false;
+      }
+
+      // Now that DLLs are extracted, try to initialize the measurement system
       _handle = MeasurementNative.instance.init();
       _isInitialized = _handle != null;
 

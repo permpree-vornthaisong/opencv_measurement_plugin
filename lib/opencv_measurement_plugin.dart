@@ -4,6 +4,8 @@
 /// for Windows, macOS, and Linux desktop applications.
 library opencv_measurement_plugin;
 
+import 'src/native_library_loader.dart';
+
 // Export all public APIs
 export 'src/measurement_service.dart';
 export 'src/measurement_camera_view.dart';
@@ -28,6 +30,9 @@ export 'src/measurement_data.dart';
 /// ```dart
 /// import 'package:opencv_measurement_plugin/opencv_measurement_plugin.dart';
 /// 
+/// // Optional: Proactively initialize the plugin (extracts DLLs)
+/// await OpencvMeasurementPlugin.initialize();
+/// 
 /// final service = MeasurementService();
 /// await service.initialize();
 /// await service.start();
@@ -46,6 +51,4 @@ export 'src/measurement_data.dart';
 ///     // Handle updates
 ///   },
 /// )
-///
-///
 ///

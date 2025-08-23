@@ -1,3 +1,9 @@
+## 1.0.1
+
+* **Bug fixes** - Improved native library loading stability
+* ✅ **Enhanced DLL bundling** - More reliable asset extraction
+* ✅ **Better error handling** - Clearer error messages for troubleshooting
+
 ## 1.0.0
 
 * **Initial release** - Real-time object measurement plugin with OpenCV
@@ -10,5 +16,5 @@
 * ✅ **Visual overlays** - Bounding boxes and measurement displays
 * ✅ **BGR to RGBA conversion** - Automatic format conversion for Flutter
 * ✅ **Comprehensive API** - Full documentation and examples
-* 📦 **Package size** - ~10MB (includes OpenCV 4.11.0 libraries)
+* 📦 **Package size** - ~8MB (includes OpenCV 4.11.0 libraries)
 * 🎯 **Target platforms** - Desktop applications only

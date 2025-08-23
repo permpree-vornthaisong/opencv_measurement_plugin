@@ -1,6 +1,6 @@
 name: opencv_measurement_plugin
 description: Real-time object measurement plugin with OpenCV for Flutter desktop applications. No external DLL required.
-version: 1.0.0
+version: 1.0.1
 homepage: https://github.com/permpree-vornthaisong/opencv_measurement_plugin
 repository: https://github.com/permpree-vornthaisong/opencv_measurement_plugin
 issue_tracker: https://github.com/permpree-vornthaisong/opencv_measurement_plugin/issues
