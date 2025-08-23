@@ -37,23 +37,19 @@ class MeasurementService {
 
       if (_isInitialized) {
         _statusController.add('Native measurement system initialized');
-        print('Measurement system ready');
       } else {
         _statusController.add('Failed to initialize camera system');
-        print('Camera initialization failed - check if camera is available');
       }
 
       return _isInitialized;
     } catch (e) {
       _statusController.add('Initialization error: $e');
-      print('Failed to initialize measurement service: $e');
       return false;
     }
   }
 
   Future<bool> start() async {
     if (_handle == null || _isRunning) {
-      print('Cannot start: handle=${_handle != null}, running=$_isRunning');
       return false;
     }
 
@@ -74,12 +70,10 @@ class MeasurementService {
       });
 
       _statusController.add('Measurement system started');
-      print('Measurement system started - polling at 30 FPS');
 
       return true;
     } catch (e) {
       _statusController.add('Start error: $e');
-      print('Error starting measurement system: $e');
       return false;
     }
   }
@@ -101,13 +95,7 @@ class MeasurementService {
       );
 
       _measurementController.add(data);
-
-      // Debug output occasionally
-      if (DateTime.now().millisecond < 33) {
-        print('$data');
-      }
     } catch (e) {
-      print('Error updating measurements: $e');
       _statusController.add('Measurement update error');
     }
   }
@@ -118,14 +106,11 @@ class MeasurementService {
     try {
       final frameData = MeasurementNative.instance.getFrame(_handle!);
       if (frameData != null) {
-        print('Frame retrieved: ${frameData.length} bytes');
         _frameController.add(frameData);
       } else {
-        print('No frame data available');
         _frameController.add(null);
       }
     } catch (e) {
-      print('Error updating frame: $e');
       _frameController.add(null);
     }
   }
@@ -145,9 +130,8 @@ class MeasurementService {
       }
 
       _statusController.add('Measurement system stopped');
-      print('Measurement system stopped');
     } catch (e) {
-      print('Error stopping measurement system: $e');
+      _statusController.add('Error stopping measurement system: $e');
     }
   }
 
@@ -157,15 +141,12 @@ class MeasurementService {
     try {
       return MeasurementNative.instance.setMode(_handle!, mode);
     } catch (e) {
-      print('Error setting detection mode: $e');
       return false;
     }
   }
 
   void dispose() {
     try {
-      print('Disposing measurement service...');
-
       stop();
 
       if (_handle != null) {
@@ -177,10 +158,8 @@ class MeasurementService {
       _statusController.close();
       _frameController.close();
       _isInitialized = false;
-
-      print('Measurement service disposed');
     } catch (e) {
-      print('Error disposing measurement service: $e');
+      // Silent cleanup failure
     }
   }
 

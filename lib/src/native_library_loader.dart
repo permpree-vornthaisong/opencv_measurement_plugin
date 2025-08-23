@@ -93,8 +93,7 @@ class NativeLibraryLoader {
         final file = File('${tempDir.path}\\$dllName');
         await file.writeAsBytes(data.buffer.asUint8List());
       } catch (e) {
-        // Some DLLs might be optional
-        print('Warning: Could not extract $dllName: $e');
+        // Some DLLs might be optional - ignore extraction failures
       }
     }
 
