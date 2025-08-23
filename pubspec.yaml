@@ -14,6 +14,7 @@ dependencies:
   flutter:
     sdk: flutter
   ffi: ^2.1.0
+  path: ^1.9.1
 
 dev_dependencies:
   flutter_test:
@@ -29,6 +30,24 @@ flutter:
         ffiPlugin: true
       linux:
         ffiPlugin: true
+
+  # Bundle all DLL files as assets
+  assets:
+    - windows/measurement_library.dll
+    - windows/opencv_core4.dll
+    - windows/opencv_imgproc4.dll
+    - windows/opencv_imgcodecs4.dll
+    - windows/opencv_videoio4.dll
+    - windows/jpeg62.dll
+    - windows/libpng16.dll
+    - windows/tiff.dll
+    - windows/zlib1.dll
+    - windows/liblzma.dll
+    - windows/libsharpyuv.dll
+    - windows/libwebp.dll
+    - windows/libwebpdecoder.dll
+    - windows/libwebpdemux.dll
+    - windows/libwebpmux.dll
 
 topics:
   - opencv

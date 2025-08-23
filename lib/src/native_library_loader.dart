@@ -3,11 +3,12 @@ import 'dart:ffi';
 import 'dart:io';
 
 import 'package:flutter/services.dart';
+import 'package:path/path.dart' as path;
 
 class NativeLibraryLoader {
   static DynamicLibrary? _lib;
 
-  /// Load native library from plugin assets
+  /// Load native library with automatic DLL bundling
   static Future<DynamicLibrary> load() async {
     if (_lib != null) return _lib!;
 
@@ -25,17 +26,18 @@ class NativeLibraryLoader {
     }
 
     try {
-      // First try to load from the plugin bundle
-      _lib = await _loadFromPluginBundle(libraryName);
+      // Method 1: Extract from Flutter assets (primary method for published plugin)
+      _lib = await _extractAndLoadFromAssets(libraryName);
     } catch (e) {
-      // Fallback to system library loading
       try {
+        // Method 2: Direct loading (fallback)
         _lib = DynamicLibrary.open(libraryName);
       } catch (e2) {
         throw Exception(
           'Failed to load native library: $libraryName\n'
-          'Bundle loading error: $e\n'
-          'System loading error: $e2',
+          'Asset extraction error: $e\n'
+          'Direct loading error: $e2\n'
+          'Please ensure the plugin is properly installed.',
         );
       }
     }
@@ -43,29 +45,16 @@ class NativeLibraryLoader {
     return _lib!;
   }
 
-  /// Load library from plugin asset bundle
-  static Future<DynamicLibrary> _loadFromPluginBundle(
+  /// Extract DLLs from Flutter assets and load
+  static Future<DynamicLibrary> _extractAndLoadFromAssets(
     String libraryName,
   ) async {
-    if (Platform.isWindows) {
-      // On Windows, we need to extract DLLs to a temporary location
-      return await _extractAndLoadWindows(libraryName);
-    } else {
-      // On Unix systems, try direct loading
-      return DynamicLibrary.open(libraryName);
-    }
-  }
-
-  /// Extract Windows DLLs and load
-  static Future<DynamicLibrary> _extractAndLoadWindows(
-    String libraryName,
-  ) async {
-    // Get temporary directory
+    // Create temporary directory
     final tempDir = Directory.systemTemp.createTempSync(
       'opencv_measurement_plugin_',
     );
 
-    // List of all required DLLs
+    // List of all required DLLs that must be bundled
     final requiredDlls = [
       'measurement_library.dll',
       'opencv_core4.dll',
@@ -84,21 +73,30 @@ class NativeLibraryLoader {
       'libwebpmux.dll',
     ];
 
-    // Extract all DLLs
+    // Extract all DLLs from plugin assets
     for (final dllName in requiredDlls) {
       try {
         final data = await rootBundle.load(
           'packages/opencv_measurement_plugin/windows/$dllName',
         );
-        final file = File('${tempDir.path}\\$dllName');
+        final file = File(path.join(tempDir.path, dllName));
         await file.writeAsBytes(data.buffer.asUint8List());
       } catch (e) {
-        // Some DLLs might be optional - ignore extraction failures
+        if (dllName == libraryName) {
+          // Main library is required
+          throw Exception('Failed to extract required library: $dllName');
+        }
+        // Other DLLs are optional - log warning but continue
+        print('Warning: Could not extract optional DLL: $dllName');
       }
     }
 
     // Load the main library
-    final mainLibPath = '${tempDir.path}\\$libraryName';
+    final mainLibPath = path.join(tempDir.path, libraryName);
+    if (!File(mainLibPath).existsSync()) {
+      throw Exception('Main library not found after extraction: $mainLibPath');
+    }
+
     return DynamicLibrary.open(mainLibPath);
   }
 
