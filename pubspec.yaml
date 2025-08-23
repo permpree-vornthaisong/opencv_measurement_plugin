@@ -7,18 +7,18 @@ issue_tracker: https://github.com/permpree-vornthaisong/opencv_measurement_plugi
 documentation: https://pub.dev/packages/opencv_measurement_plugin
 
 environment:
-  sdk: '>=3.35.1 <4.0.0'
-  flutter: ">=3.35.1"
+  sdk: '>=3.0.0 <4.0.0'
+  flutter: ">=3.3.0"
 
 dependencies:
   flutter:
     sdk: flutter
-  ffi: ^2.0.0
+  ffi: ^2.1.0
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  flutter_lints: ^3.0.0
+  flutter_lints: ^5.0.0
 
 flutter:
   plugin:
