@@ -3,7 +3,8 @@
 [![pub package](https://img.shields.io/pub/v/opencv_measurement_plugin.svg)](https://pub.dev/packages/opencv_measurement_plugin)
 [![Platform](https://img.shields.io/badge/platform-windows%20%7C%20macos%20%7C%20linux-lightgrey.svg)](https://pub.dev/packages/opencv_measurement_plugin)
 
-Real-time object detection and measurement plugin for Flutter desktop applications using OpenCV. No external DLL management required - everything is self-contained!
+Real-time object detection and measurement plugin for Flutter desktop applications using OpenCV. No external DLL management required - everything is self-contained! 
+ธนาคารกสิกรไทย 1008151616 | KASIKORNBANK 1008151616
 
 ## 🚀 Features
 
