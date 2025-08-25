@@ -28,9 +28,11 @@ Real-time object detection and measurement plugin for Flutter desktop applicatio
 
 ## 📋 Requirements
 
-- Flutter 3.3.0 or higher
-- Dart 2.17.0 or higher
+- Flutter SDK 3.35.1 (recommended for optimal results)
+- Dart 3.0.0 or higher
 - Camera permission (automatically handled)
+
+*Note: While the plugin may work with other Flutter versions, version 3.35.1 is specifically tested and recommended for the best performance and compatibility.*
 
 ## 🛠️ Installation
 
