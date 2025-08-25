@@ -38,7 +38,7 @@ Add this to your package's `pubspec.yaml` file:
 
 ```yaml
 dependencies:
-  opencv_measurement_plugin: ^1.0.0
+  opencv_measurement_plugin: ^1.0.3
 ```
 
 Then run:
