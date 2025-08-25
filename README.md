@@ -5,6 +5,8 @@
 
 Real-time object detection and measurement plugin for Flutter desktop applications using OpenCV. No external DLL management required - everything is self-contained! 
 
+![](show.jpg)
+
 ## Donating money for food would be good That way I'll have motivation to keep developing/improving. KASIKORNBANK (Account number 1008151616)
 
 ## 🚀 Features
