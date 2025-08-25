@@ -84,8 +84,6 @@ class NativeLibraryLoader {
         'opencv_measurement_plugin_',
       );
 
-      print('Extracting DLLs to: ${_extractedDir!.path}');
-
       // List of all required DLLs that must be bundled
       final requiredDlls = [
         'measurement_library.dll',
@@ -115,9 +113,7 @@ class NativeLibraryLoader {
           final file = File(path.join(_extractedDir!.path, dllName));
           await file.writeAsBytes(data.buffer.asUint8List());
           extractedCount++;
-          print('Successfully extracted: $dllName');
         } catch (e) {
-          print('Warning: Could not extract DLL: $dllName - $e');
           // For the main library, rethrow as it's critical
           if (dllName == 'measurement_library.dll') {
             throw Exception('Failed to extract main library: $e');
@@ -130,10 +126,8 @@ class NativeLibraryLoader {
           File(path.join(_extractedDir!.path, 'measurement_library.dll'))
               .existsSync();
 
-      print('DLL extraction ${_dllsExtracted ? 'successful' : 'failed'}');
       return _dllsExtracted;
     } catch (e) {
-      print('Failed to extract DLLs: $e');
       return false;
     }
   }
@@ -175,14 +169,11 @@ class NativeLibraryLoader {
           final file = File(path.join(targetDirectory, dllName));
           await file.writeAsBytes(data.buffer.asUint8List());
           successCount++;
-        } catch (e) {
-          print('Warning: Could not extract DLL to target dir: $dllName - $e');
-        }
+        } catch (e) {}
       }
 
       return successCount > 0;
     } catch (e) {
-      print('Failed to extract DLLs to target directory: $e');
       return false;
     }
   }

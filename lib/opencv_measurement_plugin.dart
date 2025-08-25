@@ -1,10 +1,6 @@
-/// OpenCV Measurement Plugin for Flutter
-/// 
-/// Real-time object detection and measurement using OpenCV
-/// for Windows, macOS, and Linux desktop applications.
-library opencv_measurement_plugin;
-
-import 'src/native_library_loader.dart';
+// Remove the library declaration and unused import
+// library opencv_measurement_plugin;
+// import 'src/native_library_loader.dart';
 
 // Export all public APIs
 export 'src/measurement_service.dart';
