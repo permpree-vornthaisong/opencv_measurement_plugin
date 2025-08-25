@@ -1,3 +1,15 @@
+## 1.0.3
+
+* **DLL bundling fix** - Fixed DLL files not being properly copied to build directories
+* **CMakeLists.txt update** - Enhanced DLL bundling configuration with dual approach (standard bundling + custom commands)
+* **Improved reliability** - More robust DLL handling for both debug and release builds
+
+## 1.0.2
+
+* **Bug fixes** - Improved native library loading stability
+* ✅ **Enhanced DLL bundling** - More reliable asset extraction
+* ✅ **Better error handling** - Clearer error messages for troubleshooting
+
 ## 1.0.1
 
 * **Bug fixes** - Improved native library loading stability

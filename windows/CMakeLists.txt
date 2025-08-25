@@ -51,8 +51,37 @@ target_link_libraries(${PLUGIN_NAME} PRIVATE flutter flutter_wrapper_plugin)
 # List of absolute paths to libraries that should be bundled with the plugin.
 # This list could contain prebuilt libraries, or libraries created by an
 # external build triggered from this build file.
+set(OPENCV_DLLS
+  "${CMAKE_CURRENT_SOURCE_DIR}/jpeg62.dll"
+  "${CMAKE_CURRENT_SOURCE_DIR}/liblzma.dll"
+  "${CMAKE_CURRENT_SOURCE_DIR}/libpng16.dll"
+  "${CMAKE_CURRENT_SOURCE_DIR}/libsharpyuv.dll"
+  "${CMAKE_CURRENT_SOURCE_DIR}/libwebp.dll"
+  "${CMAKE_CURRENT_SOURCE_DIR}/libwebpdecoder.dll"
+  "${CMAKE_CURRENT_SOURCE_DIR}/libwebpdemux.dll"
+  "${CMAKE_CURRENT_SOURCE_DIR}/libwebpmux.dll"
+  "${CMAKE_CURRENT_SOURCE_DIR}/measurement_library.dll"
+  "${CMAKE_CURRENT_SOURCE_DIR}/opencv_core4.dll"
+  "${CMAKE_CURRENT_SOURCE_DIR}/opencv_imgcodecs4.dll"
+  "${CMAKE_CURRENT_SOURCE_DIR}/opencv_imgproc4.dll"
+  "${CMAKE_CURRENT_SOURCE_DIR}/opencv_videoio4.dll"
+  "${CMAKE_CURRENT_SOURCE_DIR}/tiff.dll"
+  "${CMAKE_CURRENT_SOURCE_DIR}/zlib1.dll"
+)
+
+# Copy DLLs to the output directory
+foreach(DLL_FILE ${OPENCV_DLLS})
+  if(EXISTS ${DLL_FILE})
+    add_custom_command(TARGET ${PLUGIN_NAME} POST_BUILD
+      COMMAND ${CMAKE_COMMAND} -E copy_if_different
+      ${DLL_FILE}
+      $<TARGET_FILE_DIR:${PLUGIN_NAME}>
+    )
+  endif()
+endforeach()
+
 set(opencv_measurement_plugin_bundled_libraries
-  ""
+  ${OPENCV_DLLS}
   PARENT_SCOPE
 )
 
